@@ -17,6 +17,16 @@ public class ModuleWeaver : BaseModuleWeaver
         attributeType = ModuleDefinition.ImportReference(typeof(ExcludeFromCodeCoverageAttribute));
         attributeConstructor = ModuleDefinition.ImportReference(typeof(ExcludeFromCodeCoverageAttribute).GetConstructor(Type.EmptyTypes));
 
+        ProcessAssemblyWideExclusionAttribute();
+    }
+
+    private void ProcessAssemblyWideExclusionAttribute()
+    {
+        var assemblyContainsAttribute = ModuleDefinition.Assembly.CustomAttributes.ContainsAttribute("ExcludeAssemblyFromCodeCoverageAttribute");
+
+        if (!assemblyContainsAttribute)
+            return;
+
         var types = ModuleDefinition.Types;
         var excludeAttribute = typeof(ExcludeFromCodeCoverageAttribute);
         foreach (var type in types)
