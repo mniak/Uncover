@@ -1,12 +1,14 @@
 ﻿using System;
 using Fody;
 using Xunit;
-#pragma warning disable 618
-#region WeaverTests
+using Shouldly;
+using System.Linq;
+using System.Diagnostics.CodeAnalysis;
 
+#pragma warning disable 618
 public class WeaverTests
 {
-    static TestResult testResult;
+    static readonly TestResult testResult;
 
     static WeaverTests()
     {
@@ -15,13 +17,30 @@ public class WeaverTests
     }
 
     [Fact]
-    public void ValidateHelloWorldIsInjected()
+    public void Class1_ShouldHaveExcludeAttribute()
     {
-        var type = testResult.Assembly.GetType("TheNamespace.Hello");
-        var instance = (dynamic)Activator.CreateInstance(type);
+        var type = GetTypeOfClass1();
 
-        Assert.Equal("Hello World", instance.World());
+        type.CustomAttributes.ShouldContain(x => x.AttributeType == typeof(ExcludeFromCodeCoverageAttribute));
+    }
+
+
+    [Fact]
+    public void Class2_ShouldHaveOnlyOneExcludeAttribute()
+    {
+        var type = GetTypeOfClass2();
+
+        type.CustomAttributes.ShouldContain(x => x.AttributeType == typeof(ExcludeFromCodeCoverageAttribute), 1);
+    }
+
+
+    private static Type GetTypeOfClass1()
+    {
+        return testResult.Assembly.GetType("AssemblyToProcess.Class1");
+    }
+
+    private static Type GetTypeOfClass2()
+    {
+        return testResult.Assembly.GetType("AssemblyToProcess.Class2");
     }
 }
-
-#endregion
