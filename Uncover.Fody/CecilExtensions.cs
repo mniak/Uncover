@@ -7,7 +7,7 @@ using Mono.Collections.Generic;
 
 public static class CecilExtensions
 {
-    public static bool ContainsAttribute(this IEnumerable<CustomAttribute> attributes, string attributeName)
+    public static bool HasAttribute(this IEnumerable<CustomAttribute> attributes, string attributeName)
     {
         return attributes
             .Select(x => x.AttributeType)

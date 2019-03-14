@@ -20,7 +20,7 @@ public class ModuleWeaver : BaseModuleWeaver
 
     private void ProcessAssemblyWideExclusionAttribute()
     {
-        var assemblyHasAttribute = ModuleDefinition.Assembly.CustomAttributes.ContainsAttribute("ExcludeAssemblyFromCodeCoverageAttribute");
+        var assemblyHasAttribute = ModuleDefinition.Assembly.CustomAttributes.HasAttribute("ExcludeAssemblyFromCodeCoverageAttribute");
 
         if (!assemblyHasAttribute)
             return;
@@ -29,7 +29,7 @@ public class ModuleWeaver : BaseModuleWeaver
         var excludeAttribute = typeof(ExcludeFromCodeCoverageAttribute);
         foreach (var type in types)
         {
-            var typeAlreadyHasAttribute = type.CustomAttributes.ContainsAttribute("System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverageAttribute");
+            var typeAlreadyHasAttribute = type.CustomAttributes.HasAttribute("System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverageAttribute");
 
             if (!typeAlreadyHasAttribute)
                 AddAttribute(type);
