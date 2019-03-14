@@ -10,8 +10,8 @@
     <PackageReference Include="FodyHelpers" Version="4.0.0-beta.1" />
     <PackageReference Include="xunit" Version="2.4.1" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.4.1" />
-    <ProjectReference Include="..\BasicFodyAddin.Fody\BasicFodyAddin.Fody.csproj" />
-    <ProjectReference Include="..\BasicFodyAddin\BasicFodyAddin.csproj" />
+    <ProjectReference Include="..\Uncover.Fody\Uncover.Fody.csproj" />
+    <ProjectReference Include="..\Uncover\Uncover.csproj" />
     <ProjectReference Include="..\AssemblyToProcess\AssemblyToProcess.csproj" />
   </ItemGroup>
   <ItemGroup>

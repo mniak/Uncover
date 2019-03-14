@@ -13,7 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BasicFodyAddin\BasicFodyAddin.csproj" />
+    <ProjectReference Include="..\Uncover\Uncover.csproj" />
   </ItemGroup>
 
   <PropertyGroup>
@@ -22,7 +22,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <WeaverFiles Include="$(SolutionDir)BasicFodyAddin.Fody\bin\$(Configuration)\$(WeaverTargetFolder)\BasicFodyAddin.Fody.dll" />
+    <WeaverFiles Include="$(SolutionDir)Uncover.Fody\bin\$(Configuration)\$(WeaverTargetFolder)\Uncover.Fody.dll" />
   </ItemGroup>
 
 </Project>
