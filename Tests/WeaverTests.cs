@@ -24,7 +24,14 @@ public class WeaverTests
         type.CustomAttributes.ShouldContain(x => x.AttributeType == typeof(ExcludeFromCodeCoverageAttribute));
     }
 
+    [Fact]
+    public void Class2_ShouldHaveExcludeAttribute()
+    {
+        var type = GetTypeOfClass2();
 
+        type.CustomAttributes.ShouldContain(x => x.AttributeType == typeof(ExcludeFromCodeCoverageAttribute));
+    }
+    
     [Fact]
     public void Class2_ShouldHaveOnlyOneExcludeAttribute()
     {

@@ -9,12 +9,10 @@ using System;
 
 public class ModuleWeaver : BaseModuleWeaver
 {
-    private TypeReference attributeType;
     private MethodReference attributeConstructor;
 
     public override void Execute()
     {
-        attributeType = ModuleDefinition.ImportReference(typeof(ExcludeFromCodeCoverageAttribute));
         attributeConstructor = ModuleDefinition.ImportReference(typeof(ExcludeFromCodeCoverageAttribute).GetConstructor(Type.EmptyTypes));
 
         ProcessAssemblyWideExclusionAttribute();
@@ -22,22 +20,18 @@ public class ModuleWeaver : BaseModuleWeaver
 
     private void ProcessAssemblyWideExclusionAttribute()
     {
-        var assemblyContainsAttribute = ModuleDefinition.Assembly.CustomAttributes.ContainsAttribute("ExcludeAssemblyFromCodeCoverageAttribute");
+        var assemblyHasAttribute = ModuleDefinition.Assembly.CustomAttributes.ContainsAttribute("ExcludeAssemblyFromCodeCoverageAttribute");
 
-        if (!assemblyContainsAttribute)
+        if (!assemblyHasAttribute)
             return;
 
         var types = ModuleDefinition.Types;
         var excludeAttribute = typeof(ExcludeFromCodeCoverageAttribute);
         foreach (var type in types)
         {
-            var hasAttr = type.CustomAttributes
-                .Select(x => x.AttributeType)
-                .Where(x => x.FullName == excludeAttribute.FullName)
-                .Where(x => !x.ContainsGenericParameter)
-                .Any();
+            var typeAlreadyHasAttribute = type.CustomAttributes.ContainsAttribute("System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverageAttribute");
 
-            if (!hasAttr)
+            if (!typeAlreadyHasAttribute)
                 AddAttribute(type);
         }
     }
