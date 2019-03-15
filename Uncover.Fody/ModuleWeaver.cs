@@ -20,9 +20,9 @@ public class ModuleWeaver : BaseModuleWeaver
 
     private void ProcessAssemblyWideExclusionAttribute()
     {
-        var assemblyHasAttribute = ModuleDefinition.Assembly.CustomAttributes.HasAttribute("ExcludeAssemblyFromCodeCoverageAttribute");
+        var assemblyExcludeAttribute = ModuleDefinition.Assembly.CustomAttributes.FindAttribute("ExcludeAssemblyFromCodeCoverageAttribute");
 
-        if (!assemblyHasAttribute)
+        if (assemblyExcludeAttribute == null)
             return;
 
         var types = ModuleDefinition.Types;
@@ -34,6 +34,8 @@ public class ModuleWeaver : BaseModuleWeaver
             if (!typeAlreadyHasAttribute)
                 AddAttribute(type);
         }
+
+        ModuleDefinition.Assembly.CustomAttributes.Remove(assemblyExcludeAttribute);
     }
 
     private void AddAttribute(TypeDefinition type)

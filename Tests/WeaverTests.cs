@@ -4,6 +4,7 @@ using Xunit;
 using Shouldly;
 using System.Linq;
 using System.Diagnostics.CodeAnalysis;
+using System.Reflection;
 
 #pragma warning disable 618
 public class WeaverTests
@@ -31,7 +32,7 @@ public class WeaverTests
 
         type.CustomAttributes.ShouldContain(x => x.AttributeType == typeof(ExcludeFromCodeCoverageAttribute));
     }
-    
+
     [Fact]
     public void Class2_ShouldHaveOnlyOneExcludeAttribute()
     {
@@ -40,14 +41,21 @@ public class WeaverTests
         type.CustomAttributes.ShouldContain(x => x.AttributeType == typeof(ExcludeFromCodeCoverageAttribute), 1);
     }
 
+    [Fact]
+    public void ExcludeAssemblyAttribute_ShouldBeRemoved()
+    {
+        TestAssembly.CustomAttributes.ShouldNotContain(x => x.AttributeType == typeof(ExcludeAssemblyFromCodeCoverageAttribute));
+    }
 
     private static Type GetTypeOfClass1()
     {
-        return testResult.Assembly.GetType("AssemblyToProcess.Class1");
+        return TestAssembly.GetType("AssemblyToProcess.Class1");
     }
 
     private static Type GetTypeOfClass2()
     {
-        return testResult.Assembly.GetType("AssemblyToProcess.Class2");
+        return TestAssembly.GetType("AssemblyToProcess.Class2");
     }
+
+    private static Assembly TestAssembly => testResult.Assembly;
 }
