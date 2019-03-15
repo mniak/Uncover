@@ -11,6 +11,7 @@
     <PackageTags>Fody, Code Coverage</PackageTags>
     <PackageProjectUrl>https://github.com/mniak/Uncover</PackageProjectUrl>
     <PackageIconUrl>https://raw.githubusercontent.com/mniak/Uncover/package_icon.png</PackageIconUrl>
+    <PackageOutputPath>$(SolutionDir)nugets</PackageOutputPath>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Fody" Version="4.0.2" PrivateAssets="None" />

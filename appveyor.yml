@@ -1,8 +1,20 @@
+version: 2.0.{build}
+branches:
+  only:
+  - master
 image: Visual Studio 2017
-build_script:
-- cmd: dotnet build --configuration Release
+configuration: Release
+platform: Any CPU
+before_build:
+- cmd: nuget restore
 test:
   assemblies:
     - '**\*Tests.dll'
 artifacts:
-- path: nugets\*.nupkg
+- path: nugets\**\*.nupkg
+deploy:
+- provider: NuGet
+  api_key:
+    secure: MiSdDXm/yh9VZFwePfpoN1iynYdIL6f3O1N6vIqZX9UQV0k/T5RHSO0UeWUwfWHb
+  on:
+    branch: master
