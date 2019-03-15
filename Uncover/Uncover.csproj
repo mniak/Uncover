@@ -9,7 +9,6 @@
     <Description>Adds an attribute to exclude an entire assembly from code coverage.</Description>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageTags>Fody, Code Coverage</PackageTags>
-    <PackageOutputPath>$(SolutionDir)../nugets</PackageOutputPath>
     <PackageProjectUrl>https://github.com/mniak/Uncover</PackageProjectUrl>
     <PackageIconUrl>https://raw.githubusercontent.com/mniak/Uncover/package_icon.png</PackageIconUrl>
   </PropertyGroup>
