@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net452;netstandard2.0</TargetFrameworks>
+    <TargetFramework>netstandard2.0</TargetFramework>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>key.snk</AssemblyOriginatorKeyFile>
     <Authors>mniak</Authors>
@@ -14,7 +14,7 @@
     <PackageOutputPath>$(SolutionDir)nugets</PackageOutputPath>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Fody" Version="4.0.2" PrivateAssets="None" />
-    <PackageReference Include="FodyPackaging" Version="4.0.2" PrivateAssets="All" />
+    <PackageReference Include="Fody" Version="6.0.2" PrivateAssets="None" />
+    <PackageReference Include="FodyPackaging" Version="6.0.2" PrivateAssets="All" />
   </ItemGroup>
 </Project>
